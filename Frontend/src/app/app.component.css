@@ -1,0 +1,44 @@
+/* app.component.css */
+.nav-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+  }
+  
+  .nav-links {
+    padding: 10px;
+  }
+  
+  .nav-menu {
+    position: relative;
+    margin-left: auto;
+    padding: 10px;
+  }
+  
+  .nav-selection {
+    cursor: pointer;
+  }
+  
+  .nav-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    color: black;
+  }
+  
+  .nav-menu:hover .nav-options {
+    display: block;
+  }
+  
+  .nav-options:hover {
+    background-color: red;
+  }
+  
+  .nav-bar>.logo{
+    width: 10%;
+  }
+  
