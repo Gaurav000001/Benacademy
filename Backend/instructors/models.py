@@ -1,6 +1,8 @@
 import uuid
 from django.db import models
 
+from departments.models import Department
+
 # Create your models here.
 class Instructor(models.Model):
     class Meta:
@@ -18,3 +20,5 @@ class Instructor(models.Model):
     date_of_birth = models.DateField()
     email = models.EmailField(unique=True)
     contact_number = models.CharField(max_length=10, unique=True)
+    departments = models.ManyToManyField(Department, related_name='instructors')
+    passoword = models.CharField(max_length=100)

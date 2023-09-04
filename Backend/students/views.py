@@ -79,7 +79,6 @@ def register_student(request):
             return JsonResponse({'message': 'Student created successfully', 'data': created_student}, safe=False, status=201)
         
         except Exception as e:
-            print(e)
             return JsonResponse({'message': 'Student not created'}, status=400)
     
     else:

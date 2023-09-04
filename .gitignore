@@ -1,1 +1,8 @@
 env
+Backend\submissions\migrations
+Backend\students\migrations
+Backend\instructors\migrations
+Backend\enrollments\migrations
+Backend\departments\migrations
+Backend\courses\migrations
+Backend\assignments\migrations
