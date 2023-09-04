@@ -48,7 +48,11 @@ POST /api/items - create a new item
 ## Technology Stack
 List and provide a brief overview of the technologies used in the project.
 
-- Node.js
-- Express.js
-- MongoDB
-- Other libraries/modules
+- Python
+- Django
+- MySQL
+- Angular
+
+## ER Diagram
+
+<img src="https://github.com/Gaurav000001/EdTech-Nexus/blob/main/ER%20Diagram.png" width=100%/>
