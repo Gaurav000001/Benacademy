@@ -6,6 +6,7 @@ from students.models import Student
 from courses.models import Course
 from instructors.models import Instructor
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ObjectDoesNotExist
 
 from departments.models import Department
 
@@ -31,6 +32,9 @@ def create_course(request, department_id):
                 instructor = instructor,
                 department = department
             )
+            
+            instructor.departments.add(department)
+            instructor.save()
             
             created_course = {
                 'course_id': course.course_id,
@@ -92,12 +96,14 @@ def get_all_courses(request):
 def change_course_instructor(request, course_id, instructor_id):
     if request.method == "PUT":
         try:
-            course = Course.objects.get(course_id = course_id)
-            if course is None:
+            try:
+                course = Course.objects.get(course_id=course_id)
+            except ObjectDoesNotExist:
                 return JsonResponse({'message': 'Course Not Found'}, status=404)
             
-            instructor = Instructor.objects.get(instructor_id=instructor_id)
-            if instructor is None:
+            try:
+                instructor = Instructor.objects.get(instructor_id=instructor_id)
+            except ObjectDoesNotExist:
                 return JsonResponse({'message': 'Instructor Not Found'}, status=404)
             
             course.instructor = instructor
@@ -122,7 +128,7 @@ def change_course_instructor(request, course_id, instructor_id):
 
         
         except Exception as e:
-            return JsonResponse({'message': 'something gone wrong'}, status=500)
+            return JsonResponse({'message': "Something went wrong"}, status=500)
     else:
         return JsonResponse({'message': "method should be PUT"}, status=400)
     
@@ -184,6 +190,7 @@ def delete_course(request, course_id):
                     'instructor_name': course.instructor.name
                 }
             }
+            course.delete()
             return JsonResponse({'message': 'Course deleted successfully', 'data': deleted_course}, status=200)
             
         except Exception as e:

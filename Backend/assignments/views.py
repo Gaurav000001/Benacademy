@@ -5,6 +5,7 @@ from submissions.models import Submission
 from enrollments.models import Enrollment
 from students.models import Student
 from assignments.models import Assignment
+from django.core.exceptions import ObjectDoesNotExist
 
 from courses.models import Course
 
@@ -24,7 +25,8 @@ def create_assignment(request, course_id):
                 title = title,
                 description = description,
                 start_at = start_at,
-                end_at = end_at
+                end_at = end_at,
+                course = course
             )
             
             created_assignment = {
@@ -38,7 +40,7 @@ def create_assignment(request, course_id):
         
         
         except Exception as e:
-                return JsonResponse({"message": str(e)}, status=400)
+            return JsonResponse({"message": "Something went wrong"}, status=500)
     else:
         return JsonResponse({'message': "method should be POST"}, status=400)
     
@@ -49,9 +51,10 @@ def create_assignment(request, course_id):
 def get_student_assignments(request, student_id):
     if request.method == "GET":
         try:
-            student = Student.objects.get(student_id = student_id)
-            if student is None:
-                return JsonResponse({'message': "Student Not Found"}, status=404)
+            try:
+                student = Student.objects.get(student_id = student_id)
+            except ObjectDoesNotExist:
+                return JsonResponse({'message': 'Student Not Found'}, status=404)
             
             enrollments = Enrollment.objects.filter(student=student)
             student_assignments = []
@@ -74,7 +77,7 @@ def get_student_assignments(request, student_id):
             return JsonResponse({'data': student_assignments}, status=200)
         
         except Exception as e:
-                    return JsonResponse({"message": str(e)}, status=400)
+            return JsonResponse({"message": "Something went wrong"}, status=500)
     else:
         return JsonResponse({'message': "method should be POST"}, status=400)
     
@@ -97,6 +100,6 @@ def delete_assignment(request, assignment_id):
         
         
         except Exception as e:
-                        return JsonResponse({"message": "Assignmnet Not Found"}, status=400)
+            return JsonResponse({"message": "Assignmnet Not Found"}, status=404)
     else:
         return JsonResponse({'message': "method should be POST"}, status=400)

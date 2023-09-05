@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from enrollments.models import Enrollment
 from courses.models import Course
+from django.core.exceptions import ObjectDoesNotExist
 
 from students.models import Student
 
@@ -12,12 +13,16 @@ from students.models import Student
 def enroll_student_to_course(request, student_id, course_id):
     if request.method == 'POST':
         try:
-            student = Student.objects.get(student_id = student_id)
-            course = Course.objects.get(course_id = course_id)
-            if student is None:
+            try:
+                student = Student.objects.get(student_id = student_id)
+            except ObjectDoesNotExist:
                 return JsonResponse({'message': 'Student Not Found'}, status=404)
-            if course is None:
+            
+            try:
+                course = Course.objects.get(course_id = course_id)
+            except ObjectDoesNotExist:
                 return JsonResponse({'message': 'Course Not Found'}, status=404)
+            
             
             existing_enrollment = Enrollment.objects.filter(student=student, course=course).first()
             if existing_enrollment is not None:
@@ -43,7 +48,7 @@ def enroll_student_to_course(request, student_id, course_id):
             return JsonResponse({'message': 'student enrolled in course successfully', 'data': created_enrollment}, status=201)
         
         except Exception as e:
-            return JsonResponse({"message": str(e)}, status=400)
+            return JsonResponse({"message": "Something went wrong"}, status=500)
     else:
         return JsonResponse({'message': "method should be POST"}, status=400)
     
@@ -53,8 +58,9 @@ def enroll_student_to_course(request, student_id, course_id):
 def bulk_enrollment(request, course_id):
     if request.method == 'POST':
         try:
-            course = Course.objects.get(course_id=course_id)
-            if course is None:
+            try:
+                course = Course.objects.get(course_id=course_id)
+            except ObjectDoesNotExist:
                 return JsonResponse({'message': 'Course Not Found'}, status=404)
 
             created_enrollments = []
@@ -64,9 +70,11 @@ def bulk_enrollment(request, course_id):
             student_ids = data.get('student_ids')
 
             for student_id in student_ids:
-                student = Student.objects.get(student_id=student_id)
-                if student is None:
+                try:
+                    student = Student.objects.get(student_id=student_id)
+                except ObjectDoesNotExist:
                     errors.append(f'Student with student_id: {student_id} Not Found')
+                
 
                 existing_enrollment = Enrollment.objects.filter(student=student, course=course).first()
                 if existing_enrollment:
@@ -93,6 +101,6 @@ def bulk_enrollment(request, course_id):
             return JsonResponse({'message': 'Bulk enrollment successful', 'data': created_enrollments, 'errors': errors}, status=201)
 
         except Exception as e:
-            return JsonResponse({'message': str(e)}, status=500)
+            return JsonResponse({"message": "Something went wrong"}, status=500)
     else:
         return JsonResponse({'message': 'Method should be POST'}, status=400)
