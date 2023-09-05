@@ -40,15 +40,166 @@ Include screenshots as necessary.
 If your application relies on external APIs, document them and include any necessary links or references.
 
 ## API Endpoints
-In case of Backend Applications provide a list of your API endpoints, methods, brief descriptions, and examples of request/response.
 
 ### Student
-GET         students/                                       - retrieve all students
-POST        students/register/                              - register new student
-GET         students/student_id/                            - get student details
-PUT         students/update/student_id/                     - update student details
-DELETE      students/delete/student_id/                     - delete student
 
+#### Retrieve All Students
+- **Endpoint**: GET /students/
+- **Description**: Retrieve a list of all students.
+- **Scope**: Admin
+
+#### Register New Student
+- **Endpoint**: POST /students/register/
+- **Description**: Register a new student.
+- **Scope**: Admin, User
+
+#### Get Student Details
+- **Endpoint**: GET /students/{student_id}/
+- **Description**: Get details of a specific student by providing their unique student ID.
+- **Scope**: Admin, User
+
+#### Update Student Details
+- **Endpoint**: PUT /students/update/{student_id}/
+- **Description**: Update details of a specific student by providing their unique student ID.
+- **Scope**: User
+
+#### Delete Student
+- **Endpoint**: DELETE /students/delete/{student_id}/
+- **Description**: Delete a specific student by providing their unique student ID.
+- **Scope**: Admin, User
+
+### Instructor
+
+#### Retrieve All Instructors
+- **Endpoint**: GET /instructors/
+- **Description**: Retrieve a list of all instructors.
+- **Scope**: Admin
+
+#### Register New Instructor
+- **Endpoint**: POST /instructors/register/
+- **Description**: Register a new instructor.
+- **Scope**: Admin, User
+
+#### Get Instructor Details
+- **Endpoint**: GET /instructors/{instructor_id}/
+- **Description**: Get details of a specific instructor by providing their unique instructor ID.
+- **Scope**: Admin, User
+
+#### Update Instructor Details
+- **Endpoint**: PUT /instructors/update/{instructor_id}/
+- **Description**: Update details of a specific instructor by providing their unique instructor ID.
+- **Scope**: User
+
+#### Delete Instructor
+- **Endpoint**: DELETE /instructors/delete/{instructor_id}/
+- **Description**: Delete a specific instructor by providing their unique instructor ID.
+- **Scope**: Admin, User
+
+### Department
+
+#### Retrieve All Departments
+- **Endpoint**: GET /departments/
+- **Description**: Retrieve a list of all base departments.
+- **Scope**: Admin
+
+#### Create New Department
+- **Endpoint**: POST /departments/create/
+- **Description**: Create a new department.
+- **Scope**: Admin
+
+#### Get Department Details
+- **Endpoint**: GET /departments/{department_id}/
+- **Description**: Get details of a specific department by providing its unique department ID.
+- **Scope**: Admin
+
+#### Update Department Name
+- **Endpoint**: PUT /departments/update/{department_id}/
+- **Description**: Update name of a specific department by providing its unique department ID.
+- **Scope**: Admin
+
+#### Delete Department
+- **Endpoint**: DELETE /departments/delete/{department_id}/
+- **Description**: Delete a specific department by providing its unique department ID.
+- **Scope**: Admin
+
+### Course
+
+#### Retrieve All Courses
+- **Endpoint**: GET /courses/
+- **Description**: Retrieve a list of all courses.
+- **Scope**: Admin
+
+#### Create New Course in Department
+- **Endpoint**: POST /courses/create/{department_id}/
+- **Description**: Create a new course in a specific department by providing its unique department ID.
+- **Scope**: Admin
+
+#### Get Student's Courses
+- **Endpoint**: GET /courses/{student_id}/
+- **Description**: Get the list of courses for a specific student by providing their unique student ID.
+- **Scope**: Admin, User
+
+#### Change Course's Instructor
+- **Endpoint**: PUT /courses/update/{course_id}/{instructor_id}/
+- **Description**: Change the instructor of a specific course by providing its unique course ID and the new instructor's ID.
+- **Scope**: Admin
+
+#### Delete Course
+- **Endpoint**: DELETE /courses/delete/{course_id}/
+- **Description**: Delete a specific course by providing its unique course ID.
+- **Scope**: Admin
+
+### Enrollment
+
+#### Enroll Student to Course
+- **Endpoint**: POST /enrollments/enroll/{student_id}/{course_id}/
+- **Description**: Enroll a student to a specific course by providing their unique student ID and the course ID.
+- **Scope**: Admin
+
+#### Enroll Students to Course
+- **Endpoint**: POST /enrollments/enroll/{course_id}/
+- **Description**: Enroll multiple students to a specific course by providing the course ID.
+- **Scope**: Admin
+
+### Assignment
+
+#### Create New Assignment in Course
+- **Endpoint**: POST /assignments/create/{course_id}/
+- **Description**: Create a new assignment in a specific course by providing its unique course ID.
+- **Scope**: Admin
+
+#### Get Student's Assignments
+- **Endpoint**: GET /assignments/{student_id}/
+- **Description**: Get the assignments for a specific student by providing their unique student ID.
+- **Scope**: Admin, User
+
+#### Delete Assignment
+- **Endpoint**: DELETE /assignments/delete/{assignment_id}/
+- **Description**: Delete a specific assignment by providing its unique assignment ID.
+- **Scope**: Admin
+
+### Submission
+
+#### Submit Assignment for Student
+- **Endpoint**: POST /submissions/{assignment_id}/{student_id}/
+- **Description**: Submit an assignment for a specific student by providing the assignment ID and student ID.
+- **Scope**: User
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 ### Instructor
 GET         instructors/                                    - retrieve all instructors
 POST        instructors/register/                           - register new instructor
@@ -80,7 +231,7 @@ GET         assignments/student_id/                         - get student assign
 DELETE      assignments/delete/assignment_id/               - delete assignment
 
 ### Submission
-POST        submissions/assignment_id/student_id/           - submit assignment for student
+POST        submissions/assignment_id/student_id/           - submit assignment for student -->
 
 
 
