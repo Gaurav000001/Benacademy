@@ -21,4 +21,4 @@ class Instructor(models.Model):
     email = models.EmailField(unique=True)
     contact_number = models.CharField(max_length=10, unique=True)
     departments = models.ManyToManyField(Department, related_name='instructors')
-    passoword = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)

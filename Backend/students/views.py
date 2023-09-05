@@ -63,7 +63,8 @@ def register_student(request):
                 date_of_birth = student_data.get('date_of_birth'),
                 major = student_data.get('major'),
                 email = student_data.get('email'),
-                contact_number = student_data.get('contact_number')
+                contact_number = student_data.get('contact_number'),
+                password = student_data.get('password')
             )
             student.save()
             

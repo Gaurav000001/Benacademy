@@ -59,7 +59,8 @@ def register_instructor(request):
                 gender = instructor_data.get('gender'),
                 date_of_birth = instructor_data.get('date_of_birth'),
                 email = instructor_data.get('email'),
-                contact_number = instructor_data.get('contact_number')
+                contact_number = instructor_data.get('contact_number'),
+                password = instructor_data.get('password')
             )
             instructor.save()
             

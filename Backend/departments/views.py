@@ -110,7 +110,8 @@ def update_department(request, department_id):
     if request.method == "PUT":
         try:
             department = get_object_or_404(Department, pk=department_id)
-            name = (json.loads(request.body)).get('name')
+            request_data = json.loads(request.body)
+            name = request_data.get('department_name')
             
             if name:
                 department.name = name
@@ -137,7 +138,8 @@ def update_department(request, department_id):
                     } for instructor in instructors]
                 }
                 return JsonResponse({'message': 'department updated successfully', 'data': department_data}, status=200)
-                
+            else:
+                return JsonResponse({'message': 'Department Name missing'}, status=400)
             
         except Exception as e:
             return JsonResponse({'message': 'Department not found'}, status=404)
