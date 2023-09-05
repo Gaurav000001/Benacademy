@@ -41,8 +41,47 @@ If your application relies on external APIs, document them and include any neces
 
 ## API Endpoints
 In case of Backend Applications provide a list of your API endpoints, methods, brief descriptions, and examples of request/response.
-GET /api/items - retrieve all items
-POST /api/items - create a new item
+
+### Student
+GET         students/                                       - retrieve all students
+POST        students/register/                              - register new student
+GET         students/student_id/                            - get student details
+PUT         students/update/student_id/                     - update student details
+DELETE      students/delete/student_id/                     - delete student
+
+### Instructor
+GET         instructors/                                    - retrieve all instructors
+POST        instructors/register/                           - register new instructor
+GET         instructors/instructor_id/                      - get instructor details
+PUT         instructors/update/instructor_id/               - update instructor details
+DELETE      instructors/delete/instructor_id/               - delete instructor
+
+### Department
+GET         departments/                                    - retrieve all departments
+POST        departments/create/                             - create new department
+GET         departments/department_id/                      - get department details
+PUT         departments/update/department_id/               - update department details
+DELETE      departments/delete/department_id/               - delete department
+
+### Course
+GET         courses/                                        - retrieve all courses
+POST        courses/create/department_id/                   - create new course in department
+GET         courses/student_id/                             - get student courses
+PUT         courses/update/course_id/instructor_id/         - change course's instructor
+DELETE      courses/delete/course_id/                       - delete course
+
+### Enrollment
+POST        enrollments/enroll/student_id/course_id/        - enroll student to course
+POST        enrollments/enroll/course_id/                   - enroll students to course
+
+### Assignment
+POST        assignments/create/course_id/                   - create new assignment in course
+GET         assignments/student_id/                         - get student assignments
+DELETE      assignments/delete/assignment_id/               - delete assignment
+
+### Submission
+POST        submissions/assignment_id/student_id/           - submit assignment for student
+
 
 
 ## Technology Stack
