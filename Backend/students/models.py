@@ -25,5 +25,5 @@ class Student(models.Model):
     major = models.CharField(max_length=100, choices=MAJOR_CHOICES)
     email = models.EmailField(unique=True)
     contact_number = models.CharField(max_length=10, unique=True)
-    passoword = models.CharField(max_length=100)
+    passoword = models.CharField(max_length=255)
     

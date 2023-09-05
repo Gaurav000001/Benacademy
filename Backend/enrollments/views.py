@@ -90,7 +90,7 @@ def bulk_enrollment(request, course_id):
                 })
 
             # Return a JSON response with the created enrollments
-            return JsonResponse({'message': 'Bulk enrollment successful', 'data': created_enrollments}, status=201)
+            return JsonResponse({'message': 'Bulk enrollment successful', 'data': created_enrollments, 'errors': errors}, status=201)
 
         except Exception as e:
             return JsonResponse({'message': str(e)}, status=500)
