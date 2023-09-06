@@ -4,7 +4,6 @@
 A brief introduction of your project goes here. You may want to cover the purpose of your project, its core functionality, and what problems it solves.
 
 ## Technology Stack
-List and provide a brief overview of the technologies used in the project.
 
 - Python
 - Django
